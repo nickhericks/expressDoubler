@@ -9,7 +9,7 @@ module.exports = (factor) => {
       next(err);
     }
     const result = num * factor;
-    res.doubled = result;
+    req.doubled = result;
     next();
   }
 }

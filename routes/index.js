@@ -6,7 +6,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  res.render('index', { doubled: res.doubled });
+  res.render('index', { doubled: req.doubled });
 });
 
 
