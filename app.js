@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-
+const multiply = require('./multiply');
 const routes = require('./routes/index');
 
 const app = express();
@@ -14,19 +14,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
-	if (req.body.number === undefined) {
-		return next();
-	}
-	const num = parseFloat(req.body.number);
-	if (isNaN(num)) {
-		const err = new Error('submitted value is not a number');
-		return next(err);
-	}
-	const result = num * 2;
-	req.doubled = result;
-	next();
-});
+// Pass in object to tell the app how to multiply
+// Set to 2 to double, 3 to triple, etc.
+app.use(multiply({ by: 2 }));
 
 app.use('/', routes);
 
