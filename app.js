@@ -15,8 +15,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-	req.body.number
-
+	const num = parseFloat(req.body.number);
+	const result = num * 2;
+	req.doubled = result;
+	next();
 });
 
 app.use('/', routes);
